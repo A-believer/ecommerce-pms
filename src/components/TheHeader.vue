@@ -1,6 +1,6 @@
 <template>
-  <div class="w-full text-gray-500 text-lg">
-    <header class="flex justify-between items-center md:w-[90%] w-[95%] mx-auto md:py-8 py-5">
+  <div class="w-full text-gray-500 text-lg border-b-2 border-gray-500">
+    <header class="flex justify-between items-center md:w-[90%] w-[95%] mx-auto md:pt-7 md:pb-3 py-5">
       <router-link to="/" class="md:text-xl text-base italic text-blue-600 leading-6 font-bold">PMS-APP</router-link>
       <nav class="space-x-5 text-lg font-medium md:block hidden">
         <router-link to="/" :class="isActive('/') ? 'text-blue-500 underline' : 'text-gray-500'">Home</router-link>

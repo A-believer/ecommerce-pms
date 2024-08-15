@@ -1,53 +1,52 @@
 <template>
   <teleport to="body">
-    <div v-if="show" @click="tryClose" class="backdrop"></div>
+    <div v-if="props.show" class="backdrop" @click="emit('close')"></div>
     <transition name="dialog">
-      <dialog open v-if="show">
-        <header>
+      <dialog open v-if="props.show">
+        <header class="flex justify-between items-center">
           <slot name="header">
-            <h2>{{ title }}</h2>
+            <h2>{{ props.title }}</h2>
+            <button @click="emit('close')">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                height="24px"
+                viewBox="0 -960 960 960"
+                width="24px"
+                fill="#e8eaed"
+              >
+                <path
+                  d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"
+                />
+              </svg>
+            </button>
           </slot>
         </header>
         <section>
           <slot></slot>
         </section>
-        <menu v-if="!fixed">
-          <slot name="actions">
-            <base-button @click="tryClose">Close</base-button>
-          </slot>
-        </menu>
       </dialog>
     </transition>
   </teleport>
 </template>
 
-<script>
-export default {
-  props: {
-    show: {
-      type: Boolean,
-      required: true,
-    },
-    title: {
-      type: String,
-      required: false,
-    },
-    fixed: {
-      type: Boolean,
-      required: false,
-      default: false,
-    },
+<script setup>
+const props = defineProps({
+  show: {
+    type: Boolean,
+    required: true
   },
-  emits: ['close'],
-  methods: {
-    tryClose() {
-      if (this.fixed) {
-        return;
-      }
-      this.$emit('close');
-    },
+  title: {
+    type: String,
+    required: false
   },
-};
+  fixed: {
+    type: Boolean,
+    required: false,
+    default: false
+  }
+})
+
+const emit = defineEmits(['close'])
 </script>
 
 <style scoped>
@@ -63,7 +62,7 @@ export default {
 
 dialog {
   position: fixed;
-  top: 20vh;
+  top: 10vh;
   left: 10%;
   width: 80%;
   z-index: 100;

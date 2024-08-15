@@ -1,9 +1,9 @@
 <template>
   <form @submit.prevent="handleSignIn"
     class="max-w-[500px] mx-auto my-20 w-full h-fit p-10 border justify-center flex-col space-y-5 rounded-lg">
-    <base-dialog :show="isLoading" title="Loggin in..." fixed>
-      <base-spinner></base-spinner>
-    </base-dialog>
+    
+      <base-spinner :is-loading="isLoading" text="Signing in!"></base-spinner>
+   
     <h1 class="text-4xl mb-5 font-bold">Sign In</h1>
     <div class="flex flex-col gap-y-2">
       <label for="email" class="text-lg">Email</label>
@@ -22,7 +22,7 @@
       </p>
     </div>
     <div>
-      <button type="submit"
+      <button :disabled="isLoading" type="submit"
         class="border rounded-md px-5 py-1.5 mx-auto w-full bg-blue-700 text-white hover:bg-blue-500">
         Sign In
       </button>
@@ -40,7 +40,6 @@ import { useRouter } from 'vue-router'
 import { authService } from '@/services/auth.service'
 import { useUserStore } from '@/stores/user'
 import BaseSpinner from '@/components/BaseSpinner.vue'
-import BaseDialog from '@/components/BaseDialog.vue'
 import { useToast } from 'vue-toastification'
 
 
