@@ -1,9 +1,9 @@
 <template>
 
     <div v-for="(product, index) in props.products" :key="index"
-        class="bg-white -hover:translate-x-[2px] hover:translate-y-[2px] shadow-xl w-[220px] rounded-lg text-gray-500 px-3 py-2 transition-all duration-300">
+        class="bg-white -hover:translate-x-[2px] hover:translate-y-[2px] shadow-xl sm:w-[220px] w-[160px] rounded-lg text-gray-500 px-3 py-2 transition-all duration-300">
         <div class="flex gap-x-2 mb-2">
-            <img class="w-auto h-auto object-contain" :src="product?.image" :alt="product?.name" />
+            <img class="sm:w-auto w-[110px] h-auto object-contain" :src="product?.image" :alt="product?.name" />
             <button :disabled="isLoading" title="Add to cart" @click="addToCart(product)" class="self-start">
                 <add-cart-icon color="fill-black hover:fill-blue-600"></add-cart-icon>
             </button>

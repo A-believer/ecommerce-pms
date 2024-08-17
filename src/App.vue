@@ -18,10 +18,12 @@ onMounted(() => {
 </script>
 
 <template>
-    <main class="bg-[#eeeeee] min-h-screen relative">
+    <main class="bg-[#eeeeee] min-h-screen relative max-w-">
         <the-header></the-header>
-     
-            <router-view></router-view>
+     <div class="max-w-[1440px] w-full mx-auto">
+        <router-view></router-view>
+     </div>
+            
         
     </main>
 </template>
