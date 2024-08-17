@@ -99,7 +99,11 @@ async function handleSignUp() {
       data.value.password.value
     )
     await userStore.setUser(user)
-    router.push('/admin_dashboard')
+    if (userStore.role === "admin") {
+      router.push('/admin_dashboard')
+    } else {
+      router.push('/')
+    }
     isLoading.value = false
     toast.info("Accounted Created Successful!");
   } catch (error) {

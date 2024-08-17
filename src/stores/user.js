@@ -4,23 +4,23 @@ import { authService } from '@/services/auth.service';
 
 export const useUserStore = defineStore('user', () => {
   const user = ref(JSON.parse(localStorage.getItem('user')) || null);
-  const role = ref(localStorage.getItem('userRole') || null);
+ 
+  const userData = ref({role: localStorage.getItem('userRole') || null, name: null});
 
   const isLoggedIn = computed(() => !!user.value);
-  const isAdmin = computed(() => role.value === 'admin');
+  const isAdmin = computed(() => userData.value?.role === 'admin');
  
   async function setUser(newUser) {
     user.value = newUser;
+
     if (newUser) {
-      localStorage.setItem('user', JSON.stringify(newUser));
-      role.value = await authService.getUserRole(newUser.uid);
-      localStorage.setItem('userRole', role.value);
+      userData.value = await authService.getUserData(newUser.uid);
+      localStorage.setItem('userRole', userData.value.role);
     } else {
-      localStorage.removeItem('user');
       localStorage.removeItem('userRole');
-      role.value = null;
+      userData.value = null;
     }
   }
 
-  return { user, role, isLoggedIn, isAdmin, setUser };
+  return { user, userData, isLoggedIn, isAdmin, setUser };
 });

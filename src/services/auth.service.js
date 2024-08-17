@@ -23,11 +23,11 @@ const userCredential = await createUserWithEmailAndPassword(auth, email, passwor
     await signOut(auth);
   },
 
-  async getUserRole(uid) {
+  async getUserData(uid) {
     const docRef = doc(db, 'users', uid);
     const docSnap = await getDoc(docRef);
     if (docSnap.exists()) {
-      return docSnap.data().role;
+      return {role: docSnap.data().role, name: docSnap.data().username};
     }
     return null;
   }

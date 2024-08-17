@@ -1,9 +1,9 @@
 <template>
   <form @submit.prevent="handleSignIn"
     class="max-w-[500px] mx-auto my-20 w-full h-fit p-10 border justify-center flex-col space-y-5 rounded-lg">
-    
-      <base-spinner :is-loading="isLoading" text="Signing in!"></base-spinner>
-   
+
+    <base-spinner :is-loading="isLoading" text="Signing in!"></base-spinner>
+
     <h1 class="text-4xl mb-5 font-bold">Sign In</h1>
     <div class="flex flex-col gap-y-2">
       <label for="email" class="text-lg">Email</label>
@@ -79,7 +79,11 @@ async function handleSignIn() {
   try {
     const user = await authService.login(data.value.email.value, data.value.password.value)
     await userStore.setUser(user)
-    router.push('/admin_dashboard')
+    if (userStore.userData.role === "admin") {
+      router.push('/admin_dashboard')
+    } else {
+      router.push('/')
+    }
     isLoading.value = false
     toast.info("Login Successful!");
   } catch (error) {

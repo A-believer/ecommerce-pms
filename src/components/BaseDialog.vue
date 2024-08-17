@@ -7,17 +7,7 @@
           <slot name="header">
             <h2>{{ props.title }}</h2>
             <button @click="emit('close')">
-              <svg
-                xmlns="http://www.w3.org/2000/svg"
-                height="24px"
-                viewBox="0 -960 960 960"
-                width="24px"
-                fill="#e8eaed"
-              >
-                <path
-                  d="m256-200-56-56 224-224-224-224 56-56 224 224 224-224 56 56-224 224 224 224-56 56-224-224-224 224Z"
-                />
-              </svg>
+            <close-icon color="w-6 h-6 fill-white"></close-icon>
             </button>
           </slot>
         </header>
@@ -30,6 +20,7 @@
 </template>
 
 <script setup>
+import CloseIcon from './svgs/CloseIcon.vue';
 const props = defineProps({
   show: {
     type: Boolean,
