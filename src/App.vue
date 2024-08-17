@@ -20,8 +20,8 @@ onMounted(() => {
 <template>
     <main class="bg-[#eeeeee] min-h-screen relative">
         <the-header></the-header>
-        <div>
+     
             <router-view></router-view>
-        </div>
+        
     </main>
 </template>

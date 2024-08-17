@@ -85,6 +85,7 @@ async function handleSignIn() {
   } catch (error) {
     console.error('Sign in error:', error)
     isLoading.value = false
+    toast.error("Error Logging");
   }
 }
 </script>

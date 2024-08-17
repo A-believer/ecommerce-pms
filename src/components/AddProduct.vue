@@ -1,7 +1,7 @@
 <template>
     <div class="max-w-md mx-auto p-4 text-xs leading-3">
         <form @submit.prevent="submitForm" class="space-y-4">
-            <base-spinner :is-loading="isLoading" text="Signing in!"></base-spinner>
+            <base-spinner :is-loading="isLoading" text="Adding product!"></base-spinner>
             <div class="flex flex-col gap-y-2">
                 <label for="name" class="text-sm font-medium">Product Name</label>
                 <input v-model="data.name" type="text" id="name"
@@ -62,8 +62,11 @@
 import { ref } from 'vue'
 import { productService } from '@/services/product.service'
 import { useToast } from 'vue-toastification'
+import { useRouter } from 'vue-router';
+import BaseSpinner from './BaseSpinner.vue';
 
 const toast = useToast()
+const router = useRouter()
 const isLoading = ref(false)
 const data = ref({
   name: '',
@@ -138,15 +141,6 @@ const generateCustomId = async () => {
 
 const submitForm = async () => {
   if (!validateForm()) {
-    console.log(!validateForm())
-    console.log({
-      name: data.value.name,
-      description: data.value.description,
-      price: data.value.price,
-      category: data.value.category,
-      stock: data.value.stock,
-      image: data.value.image
-    })
     return toast.error('fill the invalid fields')
   }
   isLoading.value = true
@@ -163,10 +157,13 @@ const submitForm = async () => {
       image: imageUrl
     })
     isLoading.value = false
+    router.push("/admin_dashboard")
     resetForm()
     toast.success('product added successfully!')
   } catch (error) {
     console.error(error)
+    isLoading.value = false
+
   }
 }
 

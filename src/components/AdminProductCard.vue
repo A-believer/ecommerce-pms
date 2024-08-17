@@ -1,13 +1,10 @@
 <template>
     <div v-for="(product, index) in props.products" :key="index"
         class="bg-white -hover:translate-x-[2px] hover:translate-y-[2px] shadow-xl w-[220px] rounded-lg text-gray-500 px-3 py-2 transition-all duration-300">
-        <base-dialog :show="isEditModalOpen" title="Add New Product" @close="isEditModalOpen = false">
-            <add-product></add-product>
-        </base-dialog>
         <div class="flex gap-x-2 mb-2">
             <img class="w-auto h-auto object-contain" :src="product?.image" :alt="product?.name" />
             <div class="flex flex-col gap-y-2">
-                <button title="Edit" @click="emits('handleEdit')">
+                <button title="Edit" @click="emits('handleEdit', product)">
                     <svg xmlns="http://www.w3.org/2000/svg" viewBox="0 -960 960 960"
                         class="w-7 h-7 fill-gray-500 hover:fill-black">
                         <path
@@ -29,12 +26,12 @@
             <p class="text-lg font-bold text-blue-600">
                 ₦ {{ new Intl.NumberFormat().format(product?.price) }}
             </p>
+            <p class="text-sm mb-2">Quantity: {{ product?.stock }}</p>
         </router-link>
     </div>
 </template>
 
 <script setup>
-import { ref } from "vue"
 
 const props = defineProps({
     products: {
@@ -42,6 +39,6 @@ const props = defineProps({
         require: true
     }
 })
-const emits = defineEmits(['handleEdit', 'handleDelete'])
-const isEditModalOpen = ref(false)
+
+const emits = defineEmits(['handleEdit'])
 </script>
