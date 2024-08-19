@@ -1,7 +1,7 @@
 <template>
-    <section class="w-[70%] mx-auto  py-10  mt-10">
+    <section class="md:w-[70%] w-[90%] mx-auto  py-10  mt-10">
         <base-spinner :is-loading="isLoading" text="Getting product!!"></base-spinner>
-        <div v-if="!isLoading" class="flex items-center justify-between gap-y-2 gap-x-20">
+        <div v-if="!isLoading" class="flex md:flex-row flex-col items-center justify-between gap-y-5 gap-x-20">
             <img :src="product?.image" alt="" class="w-[300px] h-auto flex-2" />
             <div class="space-y-5 flex-1">
                 <p class="text-2xl font-black text-gray-500 hover:text-gray-700">{{ product?.name }}</p>

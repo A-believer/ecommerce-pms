@@ -1,5 +1,5 @@
 <template>
-  <div class="">
+  <div v-if="!isActive('/')">
     <div
       class="sm:flex hidden items-center bg-white md:px-3 px-1.5 md:py-2 py-1 rounded-md border-2 focus:border-2 focus:border-blue-500 active:border-2 active:border-blue-500 text-sm">
       <input type="text" id="search" v-model="searchQuery" @input="fetchProducts" placeholder="search product name"
@@ -40,11 +40,16 @@ import { ref } from 'vue'
 import { productService } from '@/services/product.service'
 import SearchIcon from './svgs/SearchIcon.vue'
 import { useRouter } from 'vue-router';
+import { useRoute } from 'vue-router';
 
 const searchProducts = ref([])
+const route = useRoute()
 const router = useRouter()
 const isLoading = ref(false)
 const searchQuery = ref('')
+const isActive = (path) => {
+  return route.path === path
+}
 
 async function fetchProducts() {
   isLoading.value = true

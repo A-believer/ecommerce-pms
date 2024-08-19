@@ -1,11 +1,11 @@
 <template>
-  <div class="w-full text-gray-500 text-lg border-b-2 border-gray-500">
+  <div class="w-full text-gray-500 text-lg border-b-2 border-gray-500 fixed left-0 top-0 bg-[#eeeeee] z-[99]">
     <base-spinner :is-loading="isLoading" text="Logging out!"></base-spinner>
 
     <header
       class="flex justify-between items-center max-w-[1440px] md:w-[90%] w-[95%] mx-auto md:pt-7 md:pb-3 py-5 relative">
       <router-link to="/"
-        class="md:text-xl text-base italic text-blue-600 hover:underline leading-6 font-black animate-pulse">PMS-APP</router-link>
+        class="md:text-xl text-base italic text-blue-600 hover:underline leading-6 font-black animate-pulse">BUY-A-PHONE</router-link>
       <nav class="gap-x-5 text-lg font-medium lg:flex items-center hidden">
         <router-link to="/" :class="isActive('/') ? 'text-blue-500 underline' : 'text-gray-500'">Home</router-link>
         <router-link to="/products"
@@ -20,7 +20,7 @@
           <cart-icon></cart-icon>
           <span
             class="absolute top-0 right-0 md:text-xs text-[8px] leading-none font-medium text-white bg-blue-500 rounded-full md:px-1.5 px-1 py-[1px]">{{
-              productStore.cartItemCount }}</span>
+            productStore.cartItemCount }}</span>
         </router-link>
 
         <div v-if="userStore?.user" class="flex items-center gap-x-1 relative font-bold text-base">
